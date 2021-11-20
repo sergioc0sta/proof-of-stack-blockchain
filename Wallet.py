@@ -12,3 +12,17 @@ class Wallet():
         signatureObject = PKCS1_v1_5.new(self.keyPair)
         signature = signatureObject.sign(dataHash)
         return signature.hex()
+    
+    @staticmethod
+    def signatureValidation(data, signature, publicKeyString):
+        signature = bytes.fromhex(signature)
+        dataHash = BlockchainUtils.hash(data)
+        publiKey = RSA.importKey(publicKeyString)
+        signatureSchemaObject = PKCS1_v1_5.new(publiKey)
+        signatureValidation = signatureSchemaObject.verify(dataHash, signature)
+        return signatureValidation
+    
+    def publicKeyString(self):
+        publicKeyString = self.keyPair.publickey().exportKey('PEM').decode('utf-8')
+        return publicKeyString
+        

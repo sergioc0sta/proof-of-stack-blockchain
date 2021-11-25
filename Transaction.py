@@ -23,3 +23,9 @@ class Transaction():
         copyObject['signature'] = ''
         return copyObject
         
+    def isTheSameTransaction(self, transaction):
+        if self.id == transaction.id:
+            return True
+        else:
+            return False
+        

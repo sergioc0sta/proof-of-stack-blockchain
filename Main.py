@@ -1,4 +1,5 @@
 from Transaction import Transaction
+from TransactionPool import TransactionPool
 from Wallet import Wallet
 
 if __name__ == '__main__':
@@ -8,8 +9,17 @@ if __name__ == '__main__':
     type = 'TRANSFER'
 
     wallet = Wallet()
+    pool = TransactionPool()
     transaction = wallet.createTransaction(receiver, amount, type)
 
-    signatureValid = wallet.signatureValidation(transaction.payload(), transaction.signature, wallet.publicKeyString())
+    if pool.transactionExists(transaction) == False:
+        pool.addTransaction(transaction)
+        
+    if pool.transactionExists(transaction) == False:
+        pool.addTransaction(transaction)
     
-    print(signatureValid)
+    print(pool.transactions)
+        
+
+    #signatureValid = wallet.signatureValidation(transaction.payload(), transaction.signature, wallet.publicKeyString())
+    #print(signatureValid)

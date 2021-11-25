@@ -7,12 +7,9 @@ if __name__ == '__main__':
     amount = 1
     type = 'TRANSFER'
 
-    transaction = Transaction(sender, receiver, amount, type)
-    
     wallet = Wallet()
-    signature = wallet.sign(transaction.to_json())
-    
-    #transaction.sign(signature)
+    transaction = wallet.createTransaction(receiver, amount, type)
 
-    signatureValidation = wallet.signatureValidation(transaction.to_json(), signature, wallet.publicKeyString())
-    print(signatureValidation)
+    signatureValid = wallet.signatureValidation(transaction.payload(), transaction.signature, wallet.publicKeyString())
+    
+    print(signatureValid)

@@ -1,5 +1,6 @@
 import uuid
 import time
+import copy
 
 class Transaction():
     def __init__(self, sendThePublicKey, receiverThePublicKey, amout, type) -> None:
@@ -16,3 +17,9 @@ class Transaction():
     
     def sign(self, signature):
         self.signature = signature
+        
+    def payload(self):
+        copyObject = copy.deepcopy(self.to_json())
+        copyObject['signature'] = ''
+        return copyObject
+        

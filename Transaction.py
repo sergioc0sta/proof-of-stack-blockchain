@@ -12,18 +12,18 @@ class Transaction():
         self.timestamp = time.time()
         self.signature = ''
 
-    def to_json(self) -> dict:
+    def toJson(self) -> dict:
         return self.__dict__
     
     def sign(self, signature):
         self.signature = signature
         
-    def payload(self):
-        copyObject = copy.deepcopy(self.to_json())
+    def payload(self) -> dict:
+        copyObject = copy.deepcopy(self.toJson())
         copyObject['signature'] = ''
         return copyObject
         
-    def isTheSameTransaction(self, transaction):
+    def isTheSameTransaction(self, transaction) -> bool:
         if self.id == transaction.id:
             return True
         else:

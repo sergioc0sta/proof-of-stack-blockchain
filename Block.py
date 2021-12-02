@@ -11,6 +11,12 @@ class Block():
         self.timestamp = time.time()
         self.signature = ''
         
+    @staticmethod
+    def genesis():
+        genesisBlock = Block([], 'genesisHash', 'genesis', 0)
+        genesisBlock.timestamp = 0
+        return genesisBlock
+        
     def toJson(self) -> dict:
         data = {}
         data['lastHash'] = self.lastHash
@@ -18,7 +24,7 @@ class Block():
         data['blockCount'] = self.blockCount
         data['timestamp'] =self.timestamp
         data['signature'] = self.signature
-        transactions =[]
+        transactions = []
         for transaction in self.transactions:
             transactions.append(transaction.toJson())
         data['transactions'] = transactions

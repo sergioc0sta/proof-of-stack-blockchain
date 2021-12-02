@@ -8,7 +8,7 @@ class Transaction():
         self.receiverThePublicKey = receiverThePublicKey
         self.amount = amout
         self.type = type
-        self.id =uuid.uuid1().hex
+        self.id = uuid.uuid1().hex
         self.timestamp = time.time()
         self.signature = ''
 
